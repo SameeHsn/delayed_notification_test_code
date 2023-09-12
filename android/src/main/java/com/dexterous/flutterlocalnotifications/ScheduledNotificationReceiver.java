@@ -128,8 +128,9 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       
       
         String baseString=  "currentDateTime: " + formattedCurrentDateTime.toString() +" ,scheduledDateTime: " + formatedSchedualDateTime + " ,isPowerSavingModeOn: " +isPowerSavingModeOn.toString() + " ,isDoNotDisturbOn: " +isDoNotDisturbOn.toString() +" ,isBatteryOptimizationEnabled: " + isBatteryOptimizationEnabled.toString() +" ,noitification_title: " + notificationDetails.title.toString();
-       if (result > 0) {
-         Log.d("---------------result:",formattedCurrentDateTime + " is after " + formatedSchedualDateTime);
+      Log.d("---------------result:","formattedCurrentDateTime: "+formattedCurrentDateTime + " : : " + "formatedSchedualDateTime: "+formatedSchedualDateTime); 
+      if (result > 0) {
+         
          try {
            Log.d("baseString:",baseString);
            throw new Exception(baseString);
