@@ -16,6 +16,24 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 
+import android.os.Bundle;
+import java.lang.Exception;
+
+import io.sentry.SentryLevel;
+import io.sentry.android.core.SentryAndroid;
+import android.app.Application;
+import io.sentry.Sentry;
+
+import java.text.ParseException;
+import java.text.*;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import android.app.NotificationManager;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.PowerManager;
 /** Created by michaelbui on 24/3/18. */
 @Keep
 public class ScheduledNotificationReceiver extends BroadcastReceiver {
@@ -60,6 +78,92 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
 
       FlutterLocalNotificationsPlugin.showNotification(context, notificationDetails);
       FlutterLocalNotificationsPlugin.scheduleNextNotification(context, notificationDetails);
+
+
+      String isPowerSavingModeOn="";
+      String isDoNotDisturbOn="";
+      String isBatteryOptimizationEnabled="";
+      
+      Date date = new Date();
+      SimpleDateFormat dashDateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+      
+      String formattedCurrentDateTime = dashDateTimeFormat.format(date);
+      
+      String schedualTime=notificationDetails.scheduledDateTime.toString();
+      String formatedSchedualDateTime=schedualTime.split("T")[0]+" "+ schedualTime.split("T")[1];
+      Date cTime = new Date();
+      Date sTime = new Date();
+      try{
+        cTime=dashDateTimeFormat.parse(formattedCurrentDateTime);
+        sTime=dashDateTimeFormat.parse(formatedSchedualDateTime);
+      }
+      catch (Exception e) {
+        Log.e("ParseException",e.toString());
+      }
+
+      int result = cTime.compareTo(sTime);
+      
+      if (isPowerSavingModeOn(context)) {
+        Log.d("isPowerSavingModeOn?:", "True");
+        isPowerSavingModeOn="True";
+      } else {
+        Log.d("isPowerSavingModeOn?:", "False");
+        isPowerSavingModeOn="False";
+      }
+      if (isDoNotDisturbOn(context)) {
+        Log.d("isDoNotDisturbOn?:", "True");
+        isDoNotDisturbOn="True";
+      } else {
+        Log.d("isDoNotDisturbOn?:", "False");
+        isDoNotDisturbOn="False";
+      }
+      if (isBatteryOptimizationEnabled(context)) {
+        Log.d("isBatteryOptimizationEnabled?:", "True");
+        isBatteryOptimizationEnabled="True";
+
+      } else {
+        Log.d("isBatteryOptimizationEnabled?:", "False");
+        isBatteryOptimizationEnabled="False";
+      }
+      
+      
+        String baseString=  "currentDateTime: " + formattedCurrentDateTime.toString() +" ,scheduledDateTime: " + formatedSchedualDateTime + " ,isPowerSavingModeOn: " +isPowerSavingModeOn.toString() + " ,isDoNotDisturbOn: " +isDoNotDisturbOn.toString() +" ,isBatteryOptimizationEnabled: " + isBatteryOptimizationEnabled.toString() +" ,noitification_title: " + notificationDetails.title.toString();
+       if (result > 0) {
+         Log.d("---------------result:",formattedCurrentDateTime + " is after " + formatedSchedualDateTime);
+         try {
+           Log.d("baseString:",baseString);
+           throw new Exception(baseString);
+         } catch (Exception e) {
+           Sentry.captureException(e);
+         }
+       }
     }
+  }
+  public boolean isPowerSavingModeOn(Context context) {
+    PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+    return powerManager != null && powerManager.isPowerSaveMode();
+  }
+  public static boolean isDoNotDisturbOn(Context context) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+      NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+      if (notificationManager != null) {
+        int currentInterruptionFilter = notificationManager.getCurrentInterruptionFilter();
+        return currentInterruptionFilter == NotificationManager.INTERRUPTION_FILTER_ALARMS ||
+                currentInterruptionFilter == NotificationManager.INTERRUPTION_FILTER_PRIORITY;
+      }
+    }
+    return false;
+  }
+
+  public static boolean isBatteryOptimizationEnabled(Context context) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+      String packageName = context.getPackageName();
+      PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+
+      if (powerManager != null) {
+        return !powerManager.isIgnoringBatteryOptimizations(packageName);
+      }
+    }
+    return false;
   }
 }
