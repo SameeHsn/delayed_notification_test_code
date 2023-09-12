@@ -95,8 +95,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       Date sTime = new Date();
       try{
         cTime=dashDateTimeFormat.parse(formattedCurrentDateTime);
-        sTime=dashDateTimeFormat.parse("2023-09-12 14:10:37");
-        // sTime=dashDateTimeFormat.parse(formatedSchedualDateTime);
+        sTime=dashDateTimeFormat.parse(formatedSchedualDateTime);
       }
       catch (Exception e) {
         Log.e("ParseException",e.toString());
@@ -131,7 +130,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
         String baseString=  "currentDateTime: " + formattedCurrentDateTime.toString() +" ,scheduledDateTime: " + formatedSchedualDateTime + " ,isPowerSavingModeOn: " +isPowerSavingModeOn.toString() + " ,isDoNotDisturbOn: " +isDoNotDisturbOn.toString() +" ,isBatteryOptimizationEnabled: " + isBatteryOptimizationEnabled.toString() +" ,noitification_title: " + notificationDetails.title.toString();
       
       if (result > 0) {
-      Log.d("------delayed---------result:","formattedCurrentDateTime: "+formattedCurrentDateTime + " : : " + "formatedSchedualDateTime: "+formatedSchedualDateTime);    
+      Log.d("---------------result:","Delayed Notification");    
          try {
            Log.d("baseString:",baseString);
            throw new Exception(baseString);
@@ -140,7 +139,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
          }
        }
       else{
-        Log.d("------not delayed---------result:","formattedCurrentDateTime: "+formattedCurrentDateTime + " : : " + "formatedSchedualDateTime: "+formatedSchedualDateTime);    
+        Log.d("---------------result:","Not Delayed Notification");    
       }
     }
   }
