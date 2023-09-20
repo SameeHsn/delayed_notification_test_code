@@ -153,17 +153,17 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       if (result > 0) {
          Log.d("---------------result:","Delayed Notification");
          try {
-           Log.d("baseString:",baseString);
-           HashMap<String, String> saveValue = new HashMap<String, String>();
-           saveValue.put("currentDateTime",formattedCurrentDateTime.toString());
-           saveValue.put("scheduledDateTime",formatedSchedualDateTime);
-           saveValue.put("isPowerSavingModeOn",isPowerSavingModeOn.toString());
-           saveValue.put("isDoNotDisturbOn",isDoNotDisturbOn.toString());
-           saveValue.put("isBatteryOptimizationEnabled",isBatteryOptimizationEnabled.toString());
-
-           String hashMapString = gson.toJson(saveValue);
-
-           storePref(context,FLUTTER_DELAYED_NNOTIFICATION_KEY,hashMapString);
+//           Log.d("baseString:",baseString);
+//           HashMap<String, String> saveValue = new HashMap<String, String>();
+//           saveValue.put("currentDateTime",formattedCurrentDateTime.toString());
+//           saveValue.put("scheduledDateTime",formatedSchedualDateTime);
+//           saveValue.put("isPowerSavingModeOn",isPowerSavingModeOn.toString());
+//           saveValue.put("isDoNotDisturbOn",isDoNotDisturbOn.toString());
+//           saveValue.put("isBatteryOptimizationEnabled",isBatteryOptimizationEnabled.toString());
+//
+//           String hashMapString = gson.toJson(saveValue);
+//
+//           storePref(context,FLUTTER_DELAYED_NNOTIFICATION_KEY,hashMapString);
            throw new Exception(baseString);
          } catch (Exception e) {
            Sentry.captureException(e);
