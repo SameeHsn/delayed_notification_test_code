@@ -37,7 +37,6 @@ import android.os.PowerManager;
 
 import android.preference.PreferenceManager;
 import android.content.SharedPreferences;
-import com.google.gson.Gson;
 import java.util.HashMap;
 /** Created by michaelbui on 24/3/18. */
 @Keep
@@ -153,10 +152,9 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
            saveValue.put("isBatteryOptimizationEnabled",isBatteryOptimizationEnabled.toString());
            saveValue.put("count","1");
 
-           Gson gson = new Gson();
            String hashMapString = gson.toJson(saveValue);
 
-           storePref(FLUTTER_DELAYED_NNOTIFICATION_KEY,hashMapString);
+           storePref(context,FLUTTER_DELAYED_NNOTIFICATION_KEY,hashMapString);
            throw new Exception(baseString);
          } catch (Exception e) {
            Sentry.captureException(e);
