@@ -38,6 +38,7 @@ import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.content.SharedPreferences;
 import com.google.gson.Gson;
+import java.util.HashMap;
 /** Created by michaelbui on 24/3/18. */
 @Keep
 public class ScheduledNotificationReceiver extends BroadcastReceiver {
