@@ -153,7 +153,9 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
            saveValue.put("isBatteryOptimizationEnabled",isBatteryOptimizationEnabled.toString());
            saveValue.put("count","1");
 
-           String hashMapString = Gson().toJson(saveValue);
+           Gson gson = new Gson();
+           String hashMapString = gson.toJson(saveValue);
+
            storePref(FLUTTER_DELAYED_NNOTIFICATION_KEY,hashMapString);
            throw new Exception(baseString);
          } catch (Exception e) {
