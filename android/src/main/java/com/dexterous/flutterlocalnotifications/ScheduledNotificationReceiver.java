@@ -142,8 +142,8 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
            saveValue.put("currentDateTime",formattedCurrentDateTime.toString());
            saveValue.put("scheduledDateTime",formatedSchedualDateTime);
            saveValue.put("isPowerSavingModeOn",isPowerSavingModeOn.toString());
-           saveValue.put("isDoNotDisturbOn",'True');
-           saveValue.put("isBatteryOptimizationEnabled",'True');
+           saveValue.put("isDoNotDisturbOn","True");
+           saveValue.put("isBatteryOptimizationEnabled","True");
 
            String hashMapString = gson.toJson(saveValue);
 
