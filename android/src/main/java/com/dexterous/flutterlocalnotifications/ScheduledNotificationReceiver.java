@@ -149,6 +149,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       String hashMapString = gson.toJson(saveValue);
 
       storePref(context,FLUTTER_DELAYED_NNOTIFICATION_KEY,hashMapString);
+
       if (result > 0) {
          Log.d("---------------result:","Delayed Notification");
          try {
