@@ -143,14 +143,14 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
          try {
            Log.d("baseString:",baseString);
            Map<String, dynamic> saveValue = new HashMap<>();
-            saveValue={
-                    "currentDateTime":formattedCurrentDateTime.toString(),
-                   "scheduledDateTime":formatedSchedualDateTime,
-                   "isPowerSavingModeOn":isPowerSavingModeOn.toString(),
-                   "isDoNotDisturbOn":isDoNotDisturbOn.toString(),
-                   "isBatteryOptimizationEnabled":isBatteryOptimizationEnabled.toString(),
-                   "count":1,
-            };
+
+           saveValue.put("currentDateTime":formattedCurrentDateTime.toString());
+           saveValue.put("scheduledDateTime":formatedSchedualDateTime);
+           saveValue.put("isPowerSavingModeOn":isPowerSavingModeOn.toString());
+           saveValue.put("isDoNotDisturbOn":isDoNotDisturbOn.toString());
+           saveValue.put("isBatteryOptimizationEnabled":isBatteryOptimizationEnabled.toString());
+           saveValue.put("count":"1");
+
            String hashMapString = Gson().toJson(saveValue);
            storePref(FLUTTER_DELAYED_NNOTIFICATION_KEY,hashMapString);
            throw new Exception(baseString);
