@@ -142,7 +142,8 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
          Log.d("---------------result:","Delayed Notification");
          try {
            Log.d("baseString:",baseString);
-           Map<String, dynamic> saveValue = new HashMap<>();
+
+           HashMap<String, String> saveValue = new HashMap<String, String>();
 
            saveValue.put("currentDateTime",formattedCurrentDateTime.toString());
            saveValue.put("scheduledDateTime",formatedSchedualDateTime);
