@@ -44,7 +44,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
 
   private static final String TAG = "ScheduledNotifReceiver";
   private static final String SHARED_PREFERENCES_NAME = "FlutterSharedPreferences";
-
+  private SharedPreferences preferences;
   @Override
   @SuppressWarnings("deprecation")
   public void onReceive(final Context context, Intent intent) {
@@ -141,6 +141,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       Log.d("---------------result:","Delayed Notification");    
          try {
            Log.d("baseString:",baseString);
+
            throw new Exception(baseString);
          } catch (Exception e) {
            Sentry.captureException(e);
@@ -180,8 +181,8 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
   }
 
   //sharedpreference method
-  public static void storeBooleanPref(Context context,String key, String value) {
-      preferences.edit().putString(key, value).commit();
+  public static void storePref(Context context,String key, String value) {
+    preferences.edit().putString(key, value).commit();
   }
   
   public static void getPref(Context context, String key) {
