@@ -138,6 +138,17 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       
         String baseString=  "currentDateTime: " + formattedCurrentDateTime.toString() +" ,scheduledDateTime: " + formatedSchedualDateTime + " ,isPowerSavingModeOn: " +isPowerSavingModeOn.toString() + " ,isDoNotDisturbOn: " +isDoNotDisturbOn.toString() +" ,isBatteryOptimizationEnabled: " + isBatteryOptimizationEnabled.toString() +" ,noitification_title: " + notificationDetails.title.toString();
 
+      Log.d("baseString:",baseString);
+      HashMap<String, String> saveValue = new HashMap<String, String>();
+      saveValue.put("currentDateTime",formattedCurrentDateTime.toString());
+      saveValue.put("scheduledDateTime",formatedSchedualDateTime);
+      saveValue.put("isPowerSavingModeOn",isPowerSavingModeOn.toString());
+      saveValue.put("isDoNotDisturbOn",isDoNotDisturbOn.toString());
+      saveValue.put("isBatteryOptimizationEnabled",isBatteryOptimizationEnabled.toString());
+
+      String hashMapString = gson.toJson(saveValue);
+
+      storePref(context,FLUTTER_DELAYED_NNOTIFICATION_KEY,hashMapString);
       if (result > 0) {
          Log.d("---------------result:","Delayed Notification");
          try {
