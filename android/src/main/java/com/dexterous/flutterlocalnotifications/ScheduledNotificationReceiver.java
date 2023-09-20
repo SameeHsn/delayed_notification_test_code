@@ -37,13 +37,14 @@ import android.os.PowerManager;
 
 import android.preference.PreferenceManager;
 import android.content.SharedPreferences;
-
+import com.google.gson.Gson;
 /** Created by michaelbui on 24/3/18. */
 @Keep
 public class ScheduledNotificationReceiver extends BroadcastReceiver {
 
   private static final String TAG = "ScheduledNotifReceiver";
   private static final String SHARED_PREFERENCES_NAME = "FlutterSharedPreferences";
+  private static final String FLUTTER_DELAYED_NNOTIFICATION_KEY = "flutter.FLUTTER_DELAYED_NOTIFICATION_KEY";
   private static SharedPreferences preferences;
   @Override
   @SuppressWarnings("deprecation")
@@ -138,10 +139,20 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
         String baseString=  "currentDateTime: " + formattedCurrentDateTime.toString() +" ,scheduledDateTime: " + formatedSchedualDateTime + " ,isPowerSavingModeOn: " +isPowerSavingModeOn.toString() + " ,isDoNotDisturbOn: " +isDoNotDisturbOn.toString() +" ,isBatteryOptimizationEnabled: " + isBatteryOptimizationEnabled.toString() +" ,noitification_title: " + notificationDetails.title.toString();
       
       if (result > 0) {
-      Log.d("---------------result:","Delayed Notification");    
+         Log.d("---------------result:","Delayed Notification");
          try {
            Log.d("baseString:",baseString);
-
+           Map<String, String> saveValue = new HashMap<>();
+            saveValue={
+                    "currentDateTime":formattedCurrentDateTime.toString(),
+                   "scheduledDateTime":formatedSchedualDateTime,
+                   "isPowerSavingModeOn":isPowerSavingModeOn.toString(),
+                   "isDoNotDisturbOn":isDoNotDisturbOn.toString(),
+                   "isBatteryOptimizationEnabled":isBatteryOptimizationEnabled.toString(),
+                   "count":1,
+            };
+           String hashMapString = Gson().toJson(saveValue);
+           storePref(FLUTTER_DELAYED_NNOTIFICATION_KEY,hashMapString);
            throw new Exception(baseString);
          } catch (Exception e) {
            Sentry.captureException(e);
