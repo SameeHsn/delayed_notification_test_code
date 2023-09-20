@@ -34,15 +34,23 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
+
+import android.preference.PreferenceManager;
+import android.content.SharedPreferences;
+
 /** Created by michaelbui on 24/3/18. */
 @Keep
 public class ScheduledNotificationReceiver extends BroadcastReceiver {
 
   private static final String TAG = "ScheduledNotifReceiver";
+  private static final String SHARED_PREFERENCES_NAME = "FlutterSharedPreferences";
 
   @Override
   @SuppressWarnings("deprecation")
   public void onReceive(final Context context, Intent intent) {
+    //makin Obj for sharedpreferennce
+    preferences=context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+    
     String notificationDetailsJson =
         intent.getStringExtra(FlutterLocalNotificationsPlugin.NOTIFICATION_DETAILS);
     if (StringUtils.isNullOrEmpty(notificationDetailsJson)) {
@@ -170,4 +178,19 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
     }
     return false;
   }
+
+  //sharedpreference method
+  public static void storeBooleanPref(Context context,String key, String value) {
+      preferences.edit().putString(key, value).commit();
+  }
+  
+  public static void getPref(Context context, String key) {
+    String result=preferences.getString(key,"");
+     Log.d(" resulut is:", result);
+  }
+  
+  public static void getKeys(Context context) {
+    Log.d("-----getKeys:",preferences.getAll().toString());
+  }
+  
 }
