@@ -44,7 +44,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
 
   private static final String TAG = "ScheduledNotifReceiver";
   private static final String SHARED_PREFERENCES_NAME = "FlutterSharedPreferences";
-  private SharedPreferences preferences;
+  private static SharedPreferences preferences;
   @Override
   @SuppressWarnings("deprecation")
   public void onReceive(final Context context, Intent intent) {
