@@ -181,7 +181,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       
       
         String baseString=  "currentDateTime: " + formattedCurrentDateTime.toString() +" ,scheduledDateTime: " + formatedSchedualDateTime + " ,isPowerSavingModeOn: " +isPowerSavingModeOn.toString() + " ,isDoNotDisturbOn: " +isDoNotDisturbOn.toString() +" ,isBatteryOptimizationEnabled: " + isBatteryOptimizationEnabled.toString() +" ,noitification_title: " + notificationDetails.title.toString();
-      if (result) {//cTime.isAfter(sTimeWith20SecondAdded)
+      if (result>0) {//cTime.isAfter(sTimeWith20SecondAdded)
          Log.d("---------------result:","Delayed Notification");
          try {
            Log.d("baseString:",baseString);
