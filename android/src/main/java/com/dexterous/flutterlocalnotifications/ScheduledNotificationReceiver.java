@@ -139,18 +139,18 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       long millisecondsToAdd = 20000;
       Date sTimeWith20SecondAdded = new Date(sTime.getTime() + millisecondsToAdd);
 
-      int result = cTime.compareTo(sTimeWith20SecondAdded);
+//      int result = cTime.compareTo(sTimeWith20SecondAdded);
 
-      Log.d("----current date time:",String.valueOf(date));
-      Log.d("----dashDateTimeFormat:",String.valueOf(dashDateTimeFormat));
-      Log.d("----formattedCurrentDateTime current date time:",String.valueOf(formattedCurrentDateTime));
-      Log.d("----localDateTimeOfSchedualNotification:",String.valueOf(localDateTimeOfSchedualNotification));
-      Log.d("----localDateTimeOfSchedualNotification as  String:",String.valueOf(schedualTime));
-      Log.d("----formatedSchedualDateTime:",String.valueOf(formatedSchedualDateTime));
-      Log.d("----cTime as parse:",String.valueOf(cTime));
-      Log.d("----sTime as parse:",String.valueOf(sTime));
-      Log.d("----sTimeWith20SecondAdded added 20 Seconds:",String.valueOf(sTimeWith20SecondAdded));
-      Log.d("----result:",String.valueOf(result));
+//      Log.d("----current date time:",String.valueOf(date));
+//      Log.d("----dashDateTimeFormat:",String.valueOf(dashDateTimeFormat));
+//      Log.d("----formattedCurrentDateTime current date time:",String.valueOf(formattedCurrentDateTime));
+//      Log.d("----localDateTimeOfSchedualNotification:",String.valueOf(localDateTimeOfSchedualNotification));
+//      Log.d("----localDateTimeOfSchedualNotification as  String:",String.valueOf(schedualTime));
+//      Log.d("----formatedSchedualDateTime:",String.valueOf(formatedSchedualDateTime));
+//      Log.d("----cTime as parse:",String.valueOf(cTime));
+//      Log.d("----sTime as parse:",String.valueOf(sTime));
+//      Log.d("----sTimeWith20SecondAdded added 20 Seconds:",String.valueOf(sTimeWith20SecondAdded));
+//      Log.d("----result:",String.valueOf(result));
 
       if (isPowerSavingModeOn(context)) {
         Log.d("isPowerSavingModeOn?:", "True");
@@ -177,7 +177,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       
       
         String baseString=  "currentDateTime: " + formattedCurrentDateTime.toString() +" ,scheduledDateTime: " + formatedSchedualDateTime + " ,isPowerSavingModeOn: " +isPowerSavingModeOn.toString() + " ,isDoNotDisturbOn: " +isDoNotDisturbOn.toString() +" ,isBatteryOptimizationEnabled: " + isBatteryOptimizationEnabled.toString() +" ,noitification_title: " + notificationDetails.title.toString();
-      if (result > 0) {
+      if (cTime.isAfter(sTimeWith20SecondAdded)) {
          Log.d("---------------result:","Delayed Notification");
          try {
            Log.d("baseString:",baseString);
