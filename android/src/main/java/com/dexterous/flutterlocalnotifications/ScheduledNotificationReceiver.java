@@ -117,12 +117,14 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       }
 
       // Convert the Date to an Instant
-//      Instant instant = sTime.toInstant();
+      Instant instant = sTime.toInstant();
+      ZoneId localZoneID = ZoneId.systemDefault();
+      LocalDateTime localDateTime = instant.atZone(localZoneID).toLocalDateTime();
 //      long millisecondsToAdd = 18000000; // 5 seconds in milliseconds
 //      Date schedualTimeWith5HoursAdd = new Date(sTime.getTime() + millisecondsToAdd);
-      Log.d("----current date time",date.toString());
+      Log.d("----localDateTime  w.r.t Schedual time",String.valueOf(localDateTime));
       Log.d("----formate Current date time",cTime.toString());
-      Log.d("----formateschedual date time",sTime.toString());
+      Log.d("----formate schedual date time",sTime.toString());
 //      Log.d("----.millisecondsToAdd",String.valueOf(millisecondsToAdd));
 //      Log.d("----futureDate for schedual time",futureDate.toString());
 //      Log.d("----without add 5 hours schedual Time",sTime.toString());
