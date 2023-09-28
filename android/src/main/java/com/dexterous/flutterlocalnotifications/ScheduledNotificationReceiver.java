@@ -104,8 +104,25 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       SimpleDateFormat dashDateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
       
       String formattedCurrentDateTime = dashDateTimeFormat.format(date);
-      
-      String schedualTime=notificationDetails.scheduledDateTime.toString();
+
+      try{
+        long epochMilli =
+                ZonedDateTime.of(
+                                LocalDateTime.parse(notificationDetails.scheduledDateTime),
+                                ZoneId.of(notificationDetails.timeZoneName))
+                        .toInstant()
+                        .toEpochMilli();
+        Instant instant = Instant.ofEpochMilli(epochMilli);
+        ZoneId zoneId = ZoneId.systemDefault();
+
+        LocalDateTime localDateTimeOfSchedualNotification = instant.atZone(zoneId).toLocalDateTime();
+      }
+      catch (Exception e) {
+        Log.e("local date convert exception for schedual time:",e.toString());
+      }
+
+
+      String schedualTime=localDateTimeOfSchedualNotification.toString();
       String formatedSchedualDateTime=schedualTime.split("T")[0]+" "+ schedualTime.split("T")[1];
       Date cTime = new Date();
       Date sTime = new Date();
@@ -119,34 +136,18 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
         Log.e("ParseException",e.toString());
       }
 
-      // Convert the Date to an Instant
-      long epochMilli =
-              ZonedDateTime.of(
-                              LocalDateTime.parse(notificationDetails.scheduledDateTime),
-                              ZoneId.of(notificationDetails.timeZoneName))
-                      .toInstant()
-                      .toEpochMilli();
-      Instant instant = Instant.ofEpochMilli(epochMilli);
-      ZoneId zoneId = ZoneId.systemDefault(); // Use the system default time zone
-//      ZoneId zoneId = ZoneId.of(notificationDetails.timeZoneName);
-      LocalDateTime localDateTime = instant.atZone(zoneId).toLocalDateTime();
-      Log.d("----epochMilli",String.valueOf(epochMilli));
-      Log.d("----localDateTime",String.valueOf(localDateTime));
-      Log.d("----formate Current date time",cTime.toString());
-      Log.d("----formate schedual date time",sTime.toString());
-
-////      long millisecondsToAdd = 18000000; // 5 seconds in milliseconds
-////      Date schedualTimeWith5HoursAdd = new Date(sTime.getTime() + millisecondsToAdd);
-//      Log.d("----localDateTime  w.r.t Schedual time",String.valueOf(localDateTime));
-//      Log.d("----formate Current date time",cTime.toString());
-//      Log.d("----formate schedual date time",sTime.toString());
-//      Log.d("----not formate schedual date time",schedualTime.toString());
-//      Log.d("----.millisecondsToAdd",String.valueOf(millisecondsToAdd));
-//      Log.d("----futureDate for schedual time",futureDate.toString());
-//      Log.d("----without add 5 hours schedual Time",sTime.toString());
-
       int result = cTime.compareTo(sTime);
-      
+
+      Log.d("----current date time:",String.valueOf(date));
+      Log.d("----dashDateTimeFormat:",String.valueOf(dashDateTimeFormat));
+      Log.d("----formattedCurrentDateTime current date time:",String.valueOf(formattedCurrentDateTime));
+      Log.d("----localDateTimeOfSchedualNotification:",String.valueOf(localDateTimeOfSchedualNotification));
+      Log.d("----localDateTimeOfSchedualNotification as  String:",String.valueOf(schedualTime));
+      Log.d("----formatedSchedualDateTime:",String.valueOf(formatedSchedualDateTime));
+      Log.d("----cTime as parse:",String.valueOf(cTime));
+      Log.d("----sTime as parse:",String.valueOf(sTime));
+      Log.d("----result:",String.valueOf(result));
+
       if (isPowerSavingModeOn(context)) {
         Log.d("isPowerSavingModeOn?:", "True");
         isPowerSavingModeOn="True";
