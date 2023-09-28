@@ -26,8 +26,6 @@ import io.sentry.Sentry;
 
 import java.text.ParseException;
 import java.text.*;
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import android.app.NotificationManager;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -38,6 +36,12 @@ import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.content.SharedPreferences;
 import java.util.HashMap;
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 /** Created by michaelbui on 24/3/18. */
 @Keep
 public class ScheduledNotificationReceiver extends BroadcastReceiver {
@@ -112,12 +116,16 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
         Log.e("ParseException",e.toString());
       }
 
-      long millisecondsToAdd = 18000000; // 5 seconds in milliseconds
-      Date futureDate = new Date(sTime.getTime() + millisecondsToAdd);
+      // Convert the Date to an Instant
+//      Instant instant = sTime.toInstant();
+//      long millisecondsToAdd = 18000000; // 5 seconds in milliseconds
+//      Date schedualTimeWith5HoursAdd = new Date(sTime.getTime() + millisecondsToAdd);
       Log.d("----current date time",date.toString());
-      Log.d("----.millisecondsToAdd",String.valueOf(millisecondsToAdd));
-      Log.d("----futureDate for schedual time",futureDate.toString());
-      Log.d("----without add 5 hours schedual Time",sTime.toString());
+      Log.d("----formate Current date time",cTime.toString());
+      Log.d("----formateschedual date time",sTime.toString());
+//      Log.d("----.millisecondsToAdd",String.valueOf(millisecondsToAdd));
+//      Log.d("----futureDate for schedual time",futureDate.toString());
+//      Log.d("----without add 5 hours schedual Time",sTime.toString());
 
       int result = cTime.compareTo(sTime);
       
