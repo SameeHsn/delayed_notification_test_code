@@ -105,7 +105,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       
       String formattedCurrentDateTime = dashDateTimeFormat.format(date);
 
-      try{
+//      try{
         long epochMilli =
                 ZonedDateTime.of(
                                 LocalDateTime.parse(notificationDetails.scheduledDateTime),
@@ -116,10 +116,10 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
         ZoneId zoneId = ZoneId.systemDefault();
 
         LocalDateTime localDateTimeOfSchedualNotification = instant.atZone(zoneId).toLocalDateTime();
-      }
-      catch (Exception e) {
-        Log.e("local date convert exception for schedual time:",e.toString());
-      }
+//      }
+//      catch (Exception e) {
+//        Log.e("local date convert exception for schedual time:",e.toString());
+//      }
 
 
       String schedualTime=localDateTimeOfSchedualNotification.toString();
