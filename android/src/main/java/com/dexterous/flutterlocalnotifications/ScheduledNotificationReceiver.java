@@ -103,6 +103,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       Date cTime = new Date();
       Date sTime = new Date();
       Log.d("----date",date.toString());
+      Log.d("----.getTime()",date.getTime().toString());
       Log.d("----sTime",sTime.toString());
       try{
         cTime=dashDateTimeFormat.parse(formattedCurrentDateTime);
