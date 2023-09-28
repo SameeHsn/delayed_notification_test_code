@@ -126,23 +126,14 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       catch (Exception e) {
         Log.e("ParseException",e.toString());
       }
-
-       Log.e("formattedCurrentDateTime",String.valueOf(formattedCurrentDateTime));
-        Log.e("formatedSchedualDateTime",String.valueOf(formatedSchedualDateTime));
-        Log.e("cTime",String.valueOf(cTime));
-        Log.e("sTime",String.valueOf(sTime));
-        Log.e("schedualTime",String.valueOf(schedualTime));
       
       Instant instant1 = cTime.toInstant();
       Instant instant2 = sTime.toInstant();
 
       // Calculate the difference in milliseconds
-      long millisecondsDifference = Duration.between(instant1, instant2).toMillis();
+      long millisecondsDifference = Duration.between(instant2, instant1).toMillis();
       long inSeconds=millisecondsDifference/1000;
 
- Log.e("millisecondsDifference",String.valueOf(millisecondsDifference));
-      Log.e("inSeconds",String.valueOf(inSeconds));
-      Log.e("inSeconds>20",String.valueOf(inSeconds>20));
 //      Log.d("----millisecondsDifference:",String.valueOf(inSeconds));
 //      int result = cTime.compareTo(sTime);
 //      Log.d("----current date time:",String.valueOf(date));
