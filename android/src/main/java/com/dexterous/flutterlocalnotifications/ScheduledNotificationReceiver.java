@@ -136,6 +136,9 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
         Log.e("ParseException",e.toString());
       }
 
+      long millisecondsToAdd = 20000;
+      Date futureDate = new Date(sTime.getTime() + millisecondsToAdd);
+
       int result = cTime.compareTo(sTime);
 
       Log.d("----current date time:",String.valueOf(date));
@@ -146,6 +149,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       Log.d("----formatedSchedualDateTime:",String.valueOf(formatedSchedualDateTime));
       Log.d("----cTime as parse:",String.valueOf(cTime));
       Log.d("----sTime as parse:",String.valueOf(sTime));
+      Log.d("----futureDate added 20 Seconds:",String.valueOf(futureDate));
       Log.d("----result:",String.valueOf(result));
 
       if (isPowerSavingModeOn(context)) {
