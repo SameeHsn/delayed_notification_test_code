@@ -106,6 +106,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
         cTime=dashDateTimeFormat.parse(formattedCurrentDateTime);
         sTime=dashDateTimeFormat.parse(formatedSchedualDateTime);
       }
+      Log.d("----date",date.toString());
       catch (Exception e) {
         Log.e("ParseException",e.toString());
       }
