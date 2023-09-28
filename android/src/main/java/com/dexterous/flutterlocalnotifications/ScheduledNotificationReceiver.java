@@ -44,7 +44,7 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-
+import java.time.Duration;
 /** Created by michaelbui on 24/3/18. */
 @Keep
 public class ScheduledNotificationReceiver extends BroadcastReceiver {
@@ -144,7 +144,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       Log.d("----millisecondsDifference:",String.valueOf(inSeconds));
 
 
-//      int result = cTime.compareTo(sTimeWith20SecondAdded);
+      int result = cTime.compareTo(sTime);
 //      Log.d("----current date time:",String.valueOf(date));
 //      Log.d("----dashDateTimeFormat:",String.valueOf(dashDateTimeFormat));
 //      Log.d("----formattedCurrentDateTime current date time:",String.valueOf(formattedCurrentDateTime));
@@ -181,7 +181,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       
       
         String baseString=  "currentDateTime: " + formattedCurrentDateTime.toString() +" ,scheduledDateTime: " + formatedSchedualDateTime + " ,isPowerSavingModeOn: " +isPowerSavingModeOn.toString() + " ,isDoNotDisturbOn: " +isDoNotDisturbOn.toString() +" ,isBatteryOptimizationEnabled: " + isBatteryOptimizationEnabled.toString() +" ,noitification_title: " + notificationDetails.title.toString();
-      if (cTime.isAfter(sTimeWith20SecondAdded)) {
+      if (result) {//cTime.isAfter(sTimeWith20SecondAdded)
          Log.d("---------------result:","Delayed Notification");
          try {
            Log.d("baseString:",baseString);
