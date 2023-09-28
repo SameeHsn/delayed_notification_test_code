@@ -126,6 +126,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       Log.d("----localDateTime  w.r.t Schedual time",String.valueOf(localDateTime));
       Log.d("----formate Current date time",cTime.toString());
       Log.d("----formate schedual date time",sTime.toString());
+      Log.d("----not formate schedual date time",schedualTime.toString());
 //      Log.d("----.millisecondsToAdd",String.valueOf(millisecondsToAdd));
 //      Log.d("----futureDate for schedual time",futureDate.toString());
 //      Log.d("----without add 5 hours schedual Time",sTime.toString());
