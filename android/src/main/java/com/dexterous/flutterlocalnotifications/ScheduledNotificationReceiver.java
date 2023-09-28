@@ -129,6 +129,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
         Log.e("formatedSchedualDateTime",String.valueOf(formatedSchedualDateTime));
         Log.e("cTime",String.valueOf(cTime));
         Log.e("sTime",String.valueOf(sTime));
+        Log.e("schedualTime",String.valueOf(schedualTime));
       }
 
       Instant instant1 = cTime.toInstant();
