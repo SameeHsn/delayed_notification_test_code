@@ -105,7 +105,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       
       String formattedCurrentDateTime = dashDateTimeFormat.format(date);
 
-//      try{
+
         long epochMilli =
                 ZonedDateTime.of(
                                 LocalDateTime.parse(notificationDetails.scheduledDateTime),
@@ -116,11 +116,6 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
         ZoneId zoneId = ZoneId.systemDefault();
 
         LocalDateTime localDateTimeOfSchedualNotification = instant.atZone(zoneId).toLocalDateTime();
-//      }
-//      catch (Exception e) {
-//        Log.e("local date convert exception for schedual time:",e.toString());
-//      }
-
 
       String schedualTime=localDateTimeOfSchedualNotification.toString();
       String formatedSchedualDateTime=schedualTime.split("T")[0]+" "+ schedualTime.split("T")[1];
@@ -139,8 +134,17 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       long millisecondsToAdd = 20000;
       Date sTimeWith20SecondAdded = new Date(sTime.getTime() + millisecondsToAdd);
 
-//      int result = cTime.compareTo(sTimeWith20SecondAdded);
 
+      Instant instant1 = cTime.toInstant();
+      Instant instant2 = sTimeWith20SecondAdded.toInstant();
+
+      // Calculate the difference in milliseconds
+      long millisecondsDifference = Duration.between(instant1, instant2).toMillis();
+      long inSeconds=millisecondsDifference/1000;
+      Log.d("----millisecondsDifference:",String.valueOf(inSeconds));
+
+
+//      int result = cTime.compareTo(sTimeWith20SecondAdded);
 //      Log.d("----current date time:",String.valueOf(date));
 //      Log.d("----dashDateTimeFormat:",String.valueOf(dashDateTimeFormat));
 //      Log.d("----formattedCurrentDateTime current date time:",String.valueOf(formattedCurrentDateTime));
