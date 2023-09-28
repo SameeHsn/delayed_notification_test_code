@@ -140,7 +140,9 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       long millisecondsDifference = Duration.between(instant1, instant2).toMillis();
       long inSeconds=millisecondsDifference/1000;
 
-
+ Log.e("millisecondsDifference",String.valueOf(millisecondsDifference));
+      Log.e("inSeconds",String.valueOf(inSeconds));
+      Log.e("inSeconds>20",String.valueOf(inSeconds>20));
 //      Log.d("----millisecondsDifference:",String.valueOf(inSeconds));
 //      int result = cTime.compareTo(sTime);
 //      Log.d("----current date time:",String.valueOf(date));
