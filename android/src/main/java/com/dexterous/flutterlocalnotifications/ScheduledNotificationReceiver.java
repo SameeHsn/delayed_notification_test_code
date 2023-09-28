@@ -105,13 +105,9 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       
       String formattedCurrentDateTime = dashDateTimeFormat.format(date);
 
-
-        long epochMilli =
-                ZonedDateTime.of(
-                                LocalDateTime.parse(notificationDetails.scheduledDateTime),
-                                ZoneId.of(notificationDetails.timeZoneName))
-                        .toInstant()
-                        .toEpochMilli();
+        long epochMilli = ZonedDateTime.of(
+                LocalDateTime.parse(notificationDetails.scheduledDateTime),
+                        ZoneId.of(notificationDetails.timeZoneName)).toInstant().toEpochMilli();
         Instant instant = Instant.ofEpochMilli(epochMilli);
         ZoneId zoneId = ZoneId.systemDefault();
 
@@ -137,9 +133,9 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       // Calculate the difference in milliseconds
       long millisecondsDifference = Duration.between(instant1, instant2).toMillis();
       long inSeconds=millisecondsDifference/1000;
-      Log.d("----millisecondsDifference:",String.valueOf(inSeconds));
 
 
+//      Log.d("----millisecondsDifference:",String.valueOf(inSeconds));
 //      int result = cTime.compareTo(sTime);
 //      Log.d("----current date time:",String.valueOf(date));
 //      Log.d("----dashDateTimeFormat:",String.valueOf(dashDateTimeFormat));
