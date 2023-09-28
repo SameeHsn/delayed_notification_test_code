@@ -117,7 +117,8 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       }
 
       // Convert the Date to an Instant
-      Instant instant = sTime.toInstant();
+
+      Instant instant = Instant.ofEpochMilli(sTime.getTime());
       ZoneId localZoneID = ZoneId.systemDefault();
       LocalDateTime localDateTime = instant.atZone(localZoneID).toLocalDateTime();
 //      long millisecondsToAdd = 18000000; // 5 seconds in milliseconds
