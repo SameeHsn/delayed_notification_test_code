@@ -42,6 +42,9 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
 /** Created by michaelbui on 24/3/18. */
 @Keep
 public class ScheduledNotificationReceiver extends BroadcastReceiver {
@@ -117,16 +120,26 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       }
 
       // Convert the Date to an Instant
-
-      Instant instant = Instant.ofEpochMilli(sTime.getTime());
-      ZoneId localZoneID = ZoneId.systemDefault();
-      LocalDateTime localDateTime = instant.atZone(localZoneID).toLocalDateTime();
-//      long millisecondsToAdd = 18000000; // 5 seconds in milliseconds
-//      Date schedualTimeWith5HoursAdd = new Date(sTime.getTime() + millisecondsToAdd);
-      Log.d("----localDateTime  w.r.t Schedual time",String.valueOf(localDateTime));
+      long epochMilli =
+              ZonedDateTime.of(
+                              LocalDateTime.parse(notificationDetails.scheduledDateTime),
+                              ZoneId.of(notificationDetails.timeZoneName))
+                      .toInstant()
+                      .toEpochMilli();
+      Instant instant = Instant.ofEpochMilli(epochMilli);
+      ZoneId zoneId = ZoneId.of(notificationDetails.timeZoneName);
+      LocalDateTime localDateTime = instant.atZone(zoneId).toLocalDateTime();
+      Log.d("----epochMilli",String.valueOf(epochMilli));
+      Log.d("----localDateTime",String.valueOf(localDateTime));
       Log.d("----formate Current date time",cTime.toString());
       Log.d("----formate schedual date time",sTime.toString());
-      Log.d("----not formate schedual date time",schedualTime.toString());
+
+////      long millisecondsToAdd = 18000000; // 5 seconds in milliseconds
+////      Date schedualTimeWith5HoursAdd = new Date(sTime.getTime() + millisecondsToAdd);
+//      Log.d("----localDateTime  w.r.t Schedual time",String.valueOf(localDateTime));
+//      Log.d("----formate Current date time",cTime.toString());
+//      Log.d("----formate schedual date time",sTime.toString());
+//      Log.d("----not formate schedual date time",schedualTime.toString());
 //      Log.d("----.millisecondsToAdd",String.valueOf(millisecondsToAdd));
 //      Log.d("----futureDate for schedual time",futureDate.toString());
 //      Log.d("----without add 5 hours schedual Time",sTime.toString());
