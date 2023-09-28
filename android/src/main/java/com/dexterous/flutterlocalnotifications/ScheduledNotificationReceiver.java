@@ -127,7 +127,8 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
                       .toInstant()
                       .toEpochMilli();
       Instant instant = Instant.ofEpochMilli(epochMilli);
-      ZoneId zoneId = ZoneId.of(notificationDetails.timeZoneName);
+      ZoneId zoneId = ZoneId.systemDefault(); // Use the system default time zone
+//      ZoneId zoneId = ZoneId.of(notificationDetails.timeZoneName);
       LocalDateTime localDateTime = instant.atZone(zoneId).toLocalDateTime();
       Log.d("----epochMilli",String.valueOf(epochMilli));
       Log.d("----localDateTime",String.valueOf(localDateTime));
