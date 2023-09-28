@@ -114,7 +114,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
         LocalDateTime localDateTimeOfSchedualNotification = instant.atZone(zoneId).toLocalDateTime();
 
       String schedualTime=localDateTimeOfSchedualNotification.toString();
-      String formatedSchedualDateTime=schedualTime.split("T")[0]+" "+ schedualTime.split("T")[1];
+      String formatedSchedualDateTime=schedualTime.split("T")[0]+" "+ schedualTime.split("T")[1]+":00";
       Date cTime = new Date();
       Date sTime = new Date();
 
