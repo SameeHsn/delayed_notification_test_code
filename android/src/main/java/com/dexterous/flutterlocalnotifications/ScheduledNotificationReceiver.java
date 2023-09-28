@@ -131,12 +131,8 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
         Log.e("ParseException",e.toString());
       }
 
-      long millisecondsToAdd = 20000;
-      Date sTimeWith20SecondAdded = new Date(sTime.getTime() + millisecondsToAdd);
-
-
       Instant instant1 = cTime.toInstant();
-      Instant instant2 = sTimeWith20SecondAdded.toInstant();
+      Instant instant2 = sTime.toInstant();
 
       // Calculate the difference in milliseconds
       long millisecondsDifference = Duration.between(instant1, instant2).toMillis();
@@ -144,7 +140,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       Log.d("----millisecondsDifference:",String.valueOf(inSeconds));
 
 
-      int result = cTime.compareTo(sTime);
+//      int result = cTime.compareTo(sTime);
 //      Log.d("----current date time:",String.valueOf(date));
 //      Log.d("----dashDateTimeFormat:",String.valueOf(dashDateTimeFormat));
 //      Log.d("----formattedCurrentDateTime current date time:",String.valueOf(formattedCurrentDateTime));
@@ -181,7 +177,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       
       
         String baseString=  "currentDateTime: " + formattedCurrentDateTime.toString() +" ,scheduledDateTime: " + formatedSchedualDateTime + " ,isPowerSavingModeOn: " +isPowerSavingModeOn.toString() + " ,isDoNotDisturbOn: " +isDoNotDisturbOn.toString() +" ,isBatteryOptimizationEnabled: " + isBatteryOptimizationEnabled.toString() +" ,noitification_title: " + notificationDetails.title.toString();
-      if (result>0) {//cTime.isAfter(sTimeWith20SecondAdded)
+      if (inSeconds>20) {//cTime.isAfter(sTimeWith20SecondAdded)
          Log.d("---------------result:","Delayed Notification");
          try {
            Log.d("baseString:",baseString);
