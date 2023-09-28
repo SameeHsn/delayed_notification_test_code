@@ -102,11 +102,12 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       String formatedSchedualDateTime=schedualTime.split("T")[0]+" "+ schedualTime.split("T")[1];
       Date cTime = new Date();
       Date sTime = new Date();
+      Log.d("----date",date.toString());
+      Log.d("----sTime",sTime.toString());
       try{
         cTime=dashDateTimeFormat.parse(formattedCurrentDateTime);
         sTime=dashDateTimeFormat.parse(formatedSchedualDateTime);
       }
-      Log.d("----date",date.toString());
       catch (Exception e) {
         Log.e("ParseException",e.toString());
       }
