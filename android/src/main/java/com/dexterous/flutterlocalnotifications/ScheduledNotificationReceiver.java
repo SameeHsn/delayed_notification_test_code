@@ -102,9 +102,8 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       String formatedSchedualDateTime=schedualTime.split("T")[0]+" "+ schedualTime.split("T")[1];
       Date cTime = new Date();
       Date sTime = new Date();
-      Log.d("----date",date.toString());
-      Log.d("----.getTime()",date.getTime().toString());
-      Log.d("----sTime",sTime.toString());
+
+
       try{
         cTime=dashDateTimeFormat.parse(formattedCurrentDateTime);
         sTime=dashDateTimeFormat.parse(formatedSchedualDateTime);
@@ -113,6 +112,14 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
         Log.e("ParseException",e.toString());
       }
 
+      long millisecondsToAdd = 18000000; // 5 seconds in milliseconds
+      Date futureDate = new Date(date.getTime() + millisecondsToAdd);
+      Log.d("----date",date.toString());
+      Log.d("----.millisecondsToAdd",millisecondsToAdd.toString());
+      Log.d("----futureDate",futureDate.toString());
+      Log.d("----sTime",sTime.toString());
+      Log.d("----cTime",cTime.toString());
+      
       int result = cTime.compareTo(sTime);
       
       if (isPowerSavingModeOn(context)) {
