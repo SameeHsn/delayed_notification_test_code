@@ -115,11 +115,11 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       long millisecondsToAdd = 18000000; // 5 seconds in milliseconds
       Date futureDate = new Date(date.getTime() + millisecondsToAdd);
       Log.d("----date",date.toString());
-      Log.d("----.millisecondsToAdd",millisecondsToAdd.toString());
+      Log.d("----.millisecondsToAdd",String.valueOf(millisecondsToAdd));
       Log.d("----futureDate",futureDate.toString());
       Log.d("----sTime",sTime.toString());
       Log.d("----cTime",cTime.toString());
-      
+
       int result = cTime.compareTo(sTime);
       
       if (isPowerSavingModeOn(context)) {
