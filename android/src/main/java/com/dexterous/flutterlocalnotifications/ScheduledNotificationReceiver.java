@@ -172,7 +172,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       
       
         String baseString=  "currentDateTime: " + formattedCurrentDateTime.toString() +" ,scheduledDateTime: " + formatedSchedualDateTime + " ,isPowerSavingModeOn: " +isPowerSavingModeOn.toString() + " ,isDoNotDisturbOn: " +isDoNotDisturbOn.toString() +" ,isBatteryOptimizationEnabled: " + isBatteryOptimizationEnabled.toString() +" ,noitification_title: " + notificationDetails.title.toString();
-      if (inSeconds>20) {//cTime.isAfter(sTimeWith20SecondAdded)
+      if (inSeconds>20) {
          Log.d("---------------result:","Delayed Notification");
          try {
            Log.d("baseString:",baseString);
@@ -186,7 +186,9 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
            String hashMapString = gson.toJson(saveValue);
 
            storePref(context,FLUTTER_DELAYED_NNOTIFICATION_KEY,hashMapString);
-           throw new Exception(baseString);
+           if (!isPowerSavingModeOn && !isBatteryOptimizationEnabled &&   !isDoNotDisturbOn){
+             throw new Exception(baseString);
+           }
          } catch (Exception e) {
            Sentry.captureException(e);
          }
