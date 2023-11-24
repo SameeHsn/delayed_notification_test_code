@@ -187,6 +187,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
 
            storePref(context,FLUTTER_DELAYED_NNOTIFICATION_KEY,hashMapString);
            if ((isPowerSavingModeOn=="False") && (isBatteryOptimizationEnabled=="False") && (isDoNotDisturbOn=="False")){
+             Log.d("---------------result:","Delayed Notification with all settings off");
              throw new Exception(baseString);
            }
          } catch (Exception e) {
